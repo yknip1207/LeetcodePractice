@@ -1,0 +1,14 @@
+def lengthOfLongestSubstring(self, s):
+	n = len(s)
+	i, j, ans = 0, 0, 0
+	hm = {}
+	while( i < n and j < n):
+		if s[j] not in hm:
+			hm[s[j]] = 1
+			j += 1
+			ans = max(ans, j-i)
+		else:
+			hm.pop(s[i])
+			i += 1
+
+	return ans
