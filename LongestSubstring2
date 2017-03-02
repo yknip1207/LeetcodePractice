@@ -1,0 +1,30 @@
+import java.util.HashSet;
+import java.util.Set;
+
+public class LongestSubstring2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String s = "ABCDEFBXYZ";
+		System.out.println(lengthOfLongestSubstring(s));
+	}
+	public static int lengthOfLongestSubstring(String s) {
+		int n = s.length();
+		int ans = 0, i = 0, j = 0;
+		Set<Character> set = new HashSet<Character>();
+		while(i < n && j < n){
+			if(!set.contains(s.charAt(j))){
+				System.out.println("j= " + j+ ":" + s.charAt(j));
+				set.add(s.charAt(j++));
+				ans = Math.max(ans, j - i);
+			}
+			else{
+				System.out.println("j= " + j+ ":" + s.charAt(j)+ " contained!");
+				System.out.println("i= " + i+ ":" + s.charAt(i)+ " removed");
+				set.remove(s.charAt(i++));
+			}
+		}
+		
+		return ans;
+	}
+}
