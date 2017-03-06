@@ -1,0 +1,33 @@
+class Solution(object):
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        
+        #step 1:先找出最小的數是誰
+        lo, hi = 0, len(nums)-1
+        while(lo < hi):
+            mid = (lo + hi) / 2
+            if(nums[mid] > nums[hi]):
+                lo = mid + 1
+            else:
+                hi = mid
+                
+        #rot:數列中真正最小的人        
+        rot = lo
+        lo, hi = 0, len(nums)-1
+        while(lo<=hi):
+            mid = (lo+hi)/2
+            realmid = (rot + (lo + hi)/2) %len(nums)
+            #真正的中間數(mid) = 最小 + (最小+最大)/2
+            if(nums[realmid]==target):
+                return realmid
+            if(nums[realmid]<target):
+                lo = mid + 1
+            else:
+                hi = mid-1
+                
+                
+        return -1
