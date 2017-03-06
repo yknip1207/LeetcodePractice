@@ -1,0 +1,15 @@
+def convert(self, s, numRows):
+      if numRows == 1 or numRows >= len(s):
+            return s
+      else:
+        L = [''] * numRows
+        index, step = 0, 1
+        for i in range(0, len(s)):
+            L[index] += s[i]
+
+            if index <= 0:
+                step = 1
+            elif index >= numRows- 1:
+                step = -1
+            index += step
+    return ''.join(s for s in L)
