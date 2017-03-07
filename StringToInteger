@@ -1,0 +1,33 @@
+    public int myAtoi(String str) {
+        int total = 0, sign = 1, index = 0;
+        
+        //empty
+        if(str.length() == 0) return 0;
+        
+        //remove space
+        while(str.charAt(index) == ' ' && index < str.length()){
+            index++;
+        }
+        
+        //sign
+        if(str.charAt(index) == '+' || str.charAt(index) == '-'){
+            sign = (str.charAt(index) == '+') ? 1 : -1;
+            index++;
+        }
+        
+        //digit
+        while(index < str.length()){
+            int digit = str.charAt(index) - '0';
+            if(digit > 9 || digit < 0) break;
+            //total在往左平移乘以10之後會爆 > 2147483647
+            //或是total本身往左平移之後沒爆，但是加了最後一個digit就爆了
+            if(total > Integer.MAX_VALUE/10 || (total == Integer.MAX_VALUE/10 && digit> Integer.MAX_VALUE%10)){
+                return (sign==1) ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+            
+            total = total * 10 + digit;
+            index++;
+        }
+        
+        return total * sign;
+    }
