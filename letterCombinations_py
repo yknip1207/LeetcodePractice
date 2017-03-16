@@ -1,0 +1,14 @@
+def letterCombinations(self, digits):
+    mapping = ["0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
+    result = ['']
+    if digits == '':
+        return []
+    for i in range(len(digits)):
+        digit = digits[i]
+        while(len(result[0]) == i):
+            first = result[0]
+            result = result[1:]
+            for j in range(len(mapping[int(digit)])):
+                char = mapping[int(digit)][j]
+                result.append(first+char)
+    return result
