@@ -1,0 +1,24 @@
+	/***
+	 * 用1x2的tile拼成3*n的大地磚有幾種拼法
+	 * https://goo.gl/Btk6TD
+	 * @return
+	 */
+	public static int triTilling(int n){
+		if(n <=0 || n % 2 == 1)
+			return 0;
+		
+		switch(n){
+			case 2:
+				return 3;
+			default:
+				int[] f = new int[n+1];
+				int[] p = new int[n+1];
+				f[1] = 1;
+				p[2] = 3;
+				for(int i = 3; i <= n; i++){
+					f[i] = f[i-2] + p[i-1];
+					p[i] = p[i-2] + 2 * f[i-1];
+				}
+				return p[n];
+		}
+	}
