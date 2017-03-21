@@ -1,7 +1,8 @@
 	/***
 	 * 用1x2的tile拼成3*n的大地磚有幾種拼法
-	 * https://goo.gl/Btk6TD
-	 * @return
+	 * 圖解：https://goo.gl/Btk6TD
+	 * 網址：http://kos74185foracm.blogspot.tw/2011/06/10918-tri-tiling.html
+ 	 * @return
 	 */
 	public static int triTilling(int n){
 		if(n <=0 || n % 2 == 1)
