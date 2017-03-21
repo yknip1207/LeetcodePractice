@@ -1,7 +1,8 @@
 /***
 	 * 用另一個btTable做back tracking
 	 * lcsTable[i][j] 紀錄從s1的第0~i的index 與 s2的第0~j的index，兩者的LCS長度
-	 * @param str1
+	 * 教學： http://www.csie.ntnu.edu.tw/~u91029/LongestCommonSubsequence.html	
+         * @param str1
 	 * @param str2
 	 * @return
 	 */
