@@ -1,0 +1,49 @@
+	/***
+	 * 只找longest common subsequence，沒有back tracking
+	 * 找出 s1 和 s2 的 LCS 。寫成 LCS(s1, s2)，拆解 s1 和 s2 的最後一個元素，叫做 e1 和 e2 
+	 * 		s1 = sub1 + e1
+	 * 		s2 = sub2 + e2
+	 * 共四種case: 
+	 * 			case1: LCS包含了e1但不包含e2，表示e2沒屁用可以不用看 => LCS(s1, s2) = LCS(s1, sub2)
+	 * 			case2: LCS(s1, s2)不包含e1但包含e2 			 => LCS(s1, s2) = LCS(sub1, s2)
+	 * 			case3: LCS(s1, s2)不包含e1也不包含e2			 => LCS(s1, s2) = LCS(sub1, sub2)
+	 * 			case4: LCS(s1, s2)同時包含e1與e2 (意即e1=e2)	 => LCS(s1, s2) = LCS(sub1, sub2) + e1
+	 * 
+	 * 歸納：LCS(s1,s2) = LCS(sub1, sub2)+1, 										if e1 = e2
+	 *                 = LCS(s1, sub2) or LCS(sub1, s2) or LCS(sub1, sub2),		if e1 != e2
+	 *                 
+	 * 再歸納：LCS(s1,s2) = LCS(sub1, sub2)+1, 										if e1 = e2
+	 *                  = MAX( LCS(s1, sub2), LCS(sub1, s2) ),						if e1 != e2
+	 * @param str1
+	 * @param str2
+	 * @return
+	 */
+	public static int longestCommonSubsequence(String str1, String str2){
+		if(str1.equals("") || str2.equals(""))
+			return 0;
+		int str1Len = str1.length();
+		int str2Len = str2.length();
+		char[] s1 = new char[str1Len+1];
+		char[] s2 = new char[str2Len+1];
+		int[][] lcsTable = new int[str1Len+1][str2Len+1];
+		s1[0] = '0';
+		s2[0] = '0';
+		for(int i = 1; i < str1Len+1; i++)
+			s1[i] = str1.charAt(i-1);
+		
+		for(int i = 1; i < str2Len+1; i++)
+			s2[i] = str2.charAt(i-1);
+		
+		
+		
+		for(int i = 1; i < s1.length; i++){
+			for(int j = 1; j < s2.length; j++){
+				if(s1[i] == s2[j])
+					lcsTable[i][j] = lcsTable[i-1][j-1] + 1;
+				else
+					lcsTable[i][j] = Math.max(lcsTable[i][j-1], lcsTable[i-1][j]);
+			}
+		}
+		
+		return lcsTable[str1Len][str2Len];
+	}
